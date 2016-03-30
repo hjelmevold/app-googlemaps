@@ -1,0 +1,30 @@
+.part-googlemap {
+	/* Responsive container styles */
+	position: relative;
+	padding-bottom: 62%;
+}
+.part-googlemap.ultrawide {
+	padding-bottom: 38%;
+}
+.part-googlemap.square {
+	padding-bottom: 100%;
+}
+.part-googlemap.portrait {
+	padding-bottom: 162%;
+}
+.part-googlemap figcaption {
+	/* Hide off-screen, but still there for screen readers */
+	position: absolute;
+	left: -9999px;
+}
+.googlemap {
+	/* Scale responsively according to its container */
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	/* 201px ensures that the Google Maps API doesn't hide the controls */
+	min-width: 201px;
+	min-height: 201px;
+}
