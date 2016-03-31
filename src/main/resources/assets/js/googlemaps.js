@@ -27,16 +27,17 @@ function initGooglemaps() {
 
 
 function initGooglemap(currentMapTarget, index, allMapTargets) {
+	var zoom = currentMapTarget.getAttribute('data-zoom') || 17;
+	var theme = googlemapStyles[currentMapTarget.getAttribute('data-theme') || 'original'];
 
-	console.log(parseInt(currentMapTarget.getAttribute('data-zoom')));
-
+	// Initialize the map
 	var map = new google.maps.Map(currentMapTarget, {
-		center: {lat: 59.909195, lng: 10.742339},
+		center: new google.maps.LatLng(0, 0),
 		fullscreenControl: true,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		scrollwheel: false,
-		styles: googlemapStyles[currentMapTarget.getAttribute('data-theme') || 'original'],
-		zoom: parseInt(currentMapTarget.getAttribute('data-zoom')) || 17
+		styles: theme,
+		zoom: zoom
 	});
 
 	// Used for dynamically calculating center
@@ -49,27 +50,29 @@ function initGooglemap(currentMapTarget, index, allMapTargets) {
 		var marker = new google.maps.Marker({
 	        map: map,
 	        position: {
-	        	// TODO: handle null values (Array.filter? if-test? where? maybe use google maps latlng() function?)
 	        	lat: parseFloat(currentMarker.getAttribute('data-lat')),
 	        	lng: parseFloat(currentMarker.getAttribute('data-lng'))
 	        },
 	        title: currentMarker.innerText
 	    });
 
-	    var infowindow = new google.maps.InfoWindow({
-	    	// this requires there to always be a <dd> following the <dt>
-	        content: currentMarker.nextElementSibling.innerHTML
-	    });
+		// Add infowindow if the following <dd> has HTML content
+		if (currentMarker.nextElementSibling.innerHTML) {
+			var infowindow = new google.maps.InfoWindow({
+		    	content: currentMarker.nextElementSibling.innerHTML
+		    });
 
-	    google.maps.event.addListener(marker, 'click', function() {
-	        infowindow.open(map, marker);
-	    });
+		    google.maps.event.addListener(marker, 'click', function() {
+		        infowindow.open(map, marker);
+		    });
+		}
 
-	    //extend the bounds to include each marker's position
+	    // Extend the map bounds to include this marker's position
 		bounds.extend(marker.position);
 	});
 
-    
+	// Fit the map to the newly inclusive bounds
+	map.fitBounds(bounds);
 
 
 
@@ -80,13 +83,9 @@ function initGooglemap(currentMapTarget, index, allMapTargets) {
         map.setCenter(center);
     });
 
-    // fit the map to the newly inclusive bounds
-    // TODO: is it possible to do calculate the center in the controller???
-	map.fitBounds(bounds);
-
-	// (optional) restore the zoom level after the map is done scaling
+	// (optional) Restore the zoom level after the map is done scaling
 	var listener = google.maps.event.addListener(map, "idle", function () {
-	    map.setZoom(parseInt(currentMapTarget.getAttribute('data-zoom')) || 17);
+	    //map.setZoom(parseInt(currentMapTarget.getAttribute('data-zoom')) || 17);
 	    google.maps.event.removeListener(listener);
 	});
 

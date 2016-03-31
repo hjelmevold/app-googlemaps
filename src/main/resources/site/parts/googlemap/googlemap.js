@@ -11,19 +11,8 @@ var libs = {
 var hardCoded = {
 	viewFile: 'googlemap.html',
 	apiKey: 'AIzaSyCbb0hs5FZw7bgEM683i4lkSsgCP5l8AJk', // dev key belonging to bhj@enonic.com
-	fallbackCoords: '59.909195,10.742339'
-}
-
-
-
-function getSettings() {
-	var siteConfig = libs.portal.getSite().data.siteConfig.config;
-	var partConfig = libs.portal.getComponent().config;
-
-	return {
-		siteConfig: siteConfig,
-		partConfig: partConfig
-	};
+	fallbackLat: '59.909195',
+	fallbackLng: '10.742339'
 }
 
 
@@ -31,9 +20,6 @@ function getSettings() {
 function getLocations() {
 	var config = libs.portal.getComponent().config;
 
-	//libs.util.log(config);
-	
-	// Handle null, one, or multiple entries
 	var locationConfigs = [{}];
 	if ( config.locations ) {
 		locationConfigs = libs.data.forceArray(config.locations);
@@ -41,16 +27,19 @@ function getLocations() {
 	
 	var locations = [];
 	for (var i = 0; i < locationConfigs.length; ++i) {
-		
+		var lat = locationConfigs[i].coordinates ? locationConfigs[i].coordinates.split(',')[0] : hardCoded.fallbackLat;
+		var lng = locationConfigs[i].coordinates ? locationConfigs[i].coordinates.split(',')[1] : hardCoded.fallbackLng;
+
 		var currentLocation = {
 			name: locationConfigs[i].name,
-			location: locationConfigs[i].coordinates || hardCoded.fallbackCoords,
-			infobubble:
-				locationConfigs[i].infobubble ?
+			lat: lat,
+			lng: lng,
+			info:
+				locationConfigs[i].info ?
 					libs.portal.processHtml({
-						value: locationConfigs[i].infobubble
+						value: locationConfigs[i].info
 					})
-				: null
+				: ''
 		};
 
 		locations.push(currentLocation);
@@ -89,11 +78,16 @@ function scriptAndCssTags() {
 exports.get = function(req) {
 	
 	var model = {
-		settings: getSettings(),
-		locations: getLocations()
+		locations: getLocations(),
+		partConfig: libs.portal.getComponent().config,
+		siteConfig: libs.portal.getSiteConfig()
 	};
 
-	//libs.util.log(model);
+	// Fill possible null values with fallbacks
+	if (! model.partConfig.theme ) model.partConfig.theme = 'original'
+	if (! model.partConfig.zoom ) model.partConfig.zoom = 17
+
+	libs.util.log(model);
 
 	// Render response body
 	var view = resolve(hardCoded.viewFile);
