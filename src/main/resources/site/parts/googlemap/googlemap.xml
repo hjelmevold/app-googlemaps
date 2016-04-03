@@ -23,7 +23,7 @@
 	  	<field-set name="settings">
 	  		<label>Map Settings</label>
 	  		<items>
-	  			<input name="heightpercent" type="RadioButton">
+	  			<input name="aspectratio" type="RadioButton">
 	  				<label>Aspect ratio</label>
 	  				<config>
 	  					<!-- Golden ratios -->
@@ -64,9 +64,10 @@
 						<option value="purple">Purple</option>
 						<option value="magenta">Magenta</option>
 						<option value="pink">Pink</option>
+						<option value="mapboxClean">MapBox</option>
+						<option value="appleMapsEsque">Apple Maps</option>
 						<option value="paper">Paper</option>
 						<option value="chilled">Chilled</option>
-						<option value="mapboxClean">MapBox</option>
 						<option value="oldTimey">Old Timey</option>
 						<option value="navigation">Navigation</option>
 						<option value="blueIsh">Blue-ish</option>
@@ -77,7 +78,6 @@
 						<option value="snazzyMaps">Snazzy Maps</option>
 						<option value="midnightCommander">Midnight Commander</option>
 						<option value="subtleGrayscale">Subtle Grayscale</option>
-						<option value="appleMapsEsque">Apple Maps</option>
 					</config>
 					<occurrences minimum="0" maximum="1"/>
 				</input>

@@ -9,11 +9,10 @@ var libs = {
 
 // HARD-CODED SETTINGS
 var hardCoded = {
-	viewFile: 'googlemap.html',
+	viewFile: 'googlestreetview.html',
 	apiKey: 'AIzaSyCbb0hs5FZw7bgEM683i4lkSsgCP5l8AJk', // dev key belonging to bhj@enonic.com
-	fallbackLat: '59.909195',
-	fallbackLng: '10.742339'
-	// enonic gateinngang: 59.908969,10.742523
+	fallbackLat: '59.908969',
+	fallbackLng: '10.742523'
 }
 
 
@@ -114,7 +113,10 @@ exports.get = function(req) {
 
 	var model = {
 		isLast: isLastAppPartOnPage(), // App scripts/css will only be included once
-		locations: getLocations(),
+		location: {
+			lat: hardCoded.fallbackLat,
+			lng: hardCoded.fallbackLng
+		},
 		partConfig: libs.portal.getComponent().config,
 		scriptAndCssMarkup: scriptAndCssMarkup(),
 		siteConfig: libs.portal.getSiteConfig()

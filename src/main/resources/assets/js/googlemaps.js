@@ -1,37 +1,24 @@
 /*
 TODO:
 
-- querySelectorAll forEach .googlemap DONE
--- for now: only those on page load (not parts loaded through AJAX)
--- later: allow initGooglemaps() to be called again, only initializing new containers
---- can probably use Array.prototype.filter() for this somehow, or maybe simply have an if statement???
-
-- retreive data attributes using getAttribute for IE support
--- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_data_attributes
--- https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute
-
-- if required attributes are not null, init a new map for that .googlemap
--- provide settings
---- variable with theme configs?
 */
-
-var googlemapObjects = [];
-
-
-
 function initGooglemaps() {
-	var targetElements = document.querySelectorAll('.googlemap');
-	Array.prototype.forEach.call(targetElements, initGooglemap);
+	
+	var targetMapContainers = document.querySelectorAll('.googlemap');
+	Array.prototype.forEach.call(targetMapContainers, initGooglemap);
+
+	var targetStreetViewContainers = document.querySelectorAll('.googlestreetview');
+	Array.prototype.forEach.call(targetStreetViewContainers, initGooglestreetview);
 }
 
 
 
-function initGooglemap(currentMapTarget, index, allMapTargets) {
-	var zoom = currentMapTarget.getAttribute('data-zoom') || 17;
-	var theme = googlemapStyles[currentMapTarget.getAttribute('data-theme') || 'original'];
+function initGooglemap(target) {
+	var zoom = parseInt(target.getAttribute('data-zoom'));
+	var theme = googlemapStyles[target.getAttribute('data-theme')];
 
 	// Initialize the map
-	var map = new google.maps.Map(currentMapTarget, {
+	var map = new google.maps.Map(target, {
 		center: new google.maps.LatLng(0, 0),
 		fullscreenControl: true,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -44,8 +31,8 @@ function initGooglemap(currentMapTarget, index, allMapTargets) {
 	var bounds = new google.maps.LatLngBounds();
 
 	// Create markers
-	var markerSources = currentMapTarget.previousElementSibling.querySelectorAll('dt');
-	Array.prototype.forEach.call(markerSources, function(currentMarker, index, allMarkers) {
+	var markerSources = target.previousElementSibling.querySelectorAll('dt');
+	Array.prototype.forEach.call(markerSources, function(currentMarker) {
 
 		var marker = new google.maps.Marker({
 	        map: map,
@@ -85,32 +72,47 @@ function initGooglemap(currentMapTarget, index, allMapTargets) {
 
 	// (optional) Restore the zoom level after the map is done scaling
 	var listener = google.maps.event.addListener(map, "idle", function () {
-	    //map.setZoom(parseInt(currentMapTarget.getAttribute('data-zoom')) || 17);
+	    map.setZoom(zoom);
 	    google.maps.event.removeListener(listener);
 	});
-
-	googlemapObjects.push(map);
 }
 
-/* Themes */
+
+
+function initGooglestreetview(target) {
+	var panorama = new google.maps.StreetViewPanorama(
+    	target,
+    	{
+			position: { lat: 59.908969, lng: 10.742523 },
+			pov: {
+				heading: 34,
+				pitch: 10
+			}
+    	}
+	);
+}
+
+
+
+/* THEMES */
 
 var googlemapStyles = {
 
 	// Simple hue changes
-	// gamma-compensated: 1-( [luminance] +.06-.75)*2
+	// gamma-compensated: 1.25-( [luminance] +.06-.75)*2
 	// where [luminance] is between .44 and .96 based on hue (see http://www.workwithcolor.com/color-luminance-2233.htm)
 	
 	original: [],
-	red: [ { "stylers": [ { "hue": "#ff0000" }, { "gamma": 1.3 } ] } ],
-	orange: [ { "stylers": [ { "hue": "#ff7700" }, { "gamma": 1.08 } ] } ],
-	yellow: [ { "stylers": [ { "hue": "#ffff00" }, { "gamma": 0.5 } ] } ],
-	green: [ { "stylers": [ { "hue": "#77ff00" }, { "gamma": 0.78 } ] } ],
-	cyan: [ { "stylers": [ { "hue": "#00ffff" }, { "gamma": 0.64 } ] } ],
-	blue: [ { "stylers": [ { "hue": "#0077ff" }, { "gamma": 1.24 }, ] } ],
-	indigo: [ { "stylers": [ { "hue": "#0000ff" }, { "gamma": 1.5 }, ] } ],
-	purple: [ { "stylers": [ { "hue": "#7700ff" }, { "gamma": 1.34 } ] } ],
-	magenta: [ { "stylers": [ { "hue": "#ff00ff" }, { "gamma": 0.98 } ] } ],
-	pink: [ { "stylers": [ { "hue": "#ff0077" }, { "gamma": 1.18 } ] } ],
+	red: [ { "stylers": [ { "hue": "#ff0000" }, { "gamma": 1.55 } ] } ],
+	orange: [ { "stylers": [ { "hue": "#ff7700" }, { "gamma": 1.33 } ] } ],
+	yellow: [ { "stylers": [ { "hue": "#ffff00" }, { "gamma": 0.75 } ] } ],
+	green: [ { "stylers": [ { "hue": "#77ff00" }, { "gamma": 1.03 } ] } ],
+	cyan: [ { "stylers": [ { "hue": "#00ffff" }, { "gamma": 0.89 } ] } ],
+	blue: [ { "stylers": [ { "hue": "#0077ff" }, { "gamma": 1.49 }, ] } ],
+	indigo: [ { "stylers": [ { "hue": "#0000ff" }, { "gamma": 1.75 }, ] } ],
+	purple: [ { "stylers": [ { "hue": "#7700ff" }, { "gamma": 1.59 } ] } ],
+	magenta: [ { "stylers": [ { "hue": "#ff00ff" }, { "gamma": 1.23 } ] } ],
+	pink: [ { "stylers": [ { "hue": "#ff0077" }, { "gamma": 1.43 } ] } ],
 	gray: [ { "stylers": [ { "saturation": -100 } ] } ],
 	/*
 	inverted: [ { "stylers": [ { "invert_lightness": true } ] } ],

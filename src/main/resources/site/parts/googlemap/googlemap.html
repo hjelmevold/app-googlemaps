@@ -1,13 +1,14 @@
-<figure class="part-googlemap" data-th-classappend="${partConfig.heightpercent}">
+<figure class="part-googlemap" data-th-classappend="${partConfig.aspectratio}">
 	<figcaption>
 		<dl>
-			<!--/*/
-			<th:block data-th-each="location : ${locations}">
-				<dt data-lat="59.909125" data-lng="10.742239" data-th-attr="data-lat=${location.lat},data-lng=${location.lng}" data-th-text="${location.name}">Enonic AS</dt>
-				<dd data-th-utext="${location.info}"><h3>Enonic AS</h3><p>Kirkegata 1-3<br/>Oslo</p></dd>
-			</th:block>
-			/*/-->
+		<!--/*/
+		<th:block data-th-each="location : ${locations}">
+			<dt data-lat="59.909125" data-lng="10.742239" data-th-attr="data-lat=${location.lat},data-lng=${location.lng}" data-th-text="${location.name}">Enonic AS</dt>
+			<dd data-th-utext="${location.info}"><h3>Enonic AS</h3><p>Kirkegata 1-3<br/>Oslo</p></dd>
+		</th:block>
+		/*/-->
 		</dl>
 	</figcaption>
-	<div class="googlemap" data-th-attr="data-theme=${partConfig.theme},data-zoom=${partConfig.zoom ? partConfig.zoom : 17}"></div>
+	<div class="googlemap" data-th-attr="data-theme=${partConfig.theme},data-zoom=${partConfig.zoom}"></div>
+	<div data-th-if="${isLast}" data-th-utext="${scriptAndCssMarkup}" data-th-remove="tag"></div>
 </figure>

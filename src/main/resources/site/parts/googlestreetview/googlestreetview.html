@@ -1,0 +1,5 @@
+<figure class="part-googlestreetview" data-th-classappend="${partConfig.aspectratio}">
+	<figcaption data-lat="59.908969" data-lng="10.742523" data-azimuth="0" data-th-attr="data-lat=${location.lat},data-lng=${location.lng},data-azimuth=${location.azimuth}" data-th-text="${location.name}">Enonic AS</figcaption>
+	<div class="googlestreetview"></div>
+	<div data-th-if="${isLast}" data-th-utext="${scriptAndCssMarkup}" data-th-remove="tag"></div>
+</figure>
