@@ -10,10 +10,8 @@ var libs = {
 // HARD-CODED SETTINGS
 var hardCoded = {
 	viewFile: 'googlemap.html',
-	apiKey: 'AIzaSyCbb0hs5FZw7bgEM683i4lkSsgCP5l8AJk', // dev key belonging to bhj@enonic.com
 	fallbackLat: '59.909195',
 	fallbackLng: '10.742339'
-	// enonic gateinngang: 59.908969,10.742523
 }
 
 
@@ -21,30 +19,28 @@ var hardCoded = {
 function getLocations() {
 	var config = libs.portal.getComponent().config;
 
-	var locationConfigs = [{}];
+	var configLocations = [{}];
 	if ( config.locations ) {
-		locationConfigs = libs.data.forceArray(config.locations);
+		configLocations = libs.data.forceArray(config.locations);
 	}
 	
+	// Create and populate array with location objects
 	var locations = [];
-	for (var i = 0; i < locationConfigs.length; ++i) {
-		var lat = locationConfigs[i].coordinates ? locationConfigs[i].coordinates.split(',')[0] : hardCoded.fallbackLat;
-		var lng = locationConfigs[i].coordinates ? locationConfigs[i].coordinates.split(',')[1] : hardCoded.fallbackLng;
-
-		var currentLocation = {
-			name: locationConfigs[i].name,
-			lat: lat,
-			lng: lng,
-			info:
-				locationConfigs[i].info ?
-					libs.portal.processHtml({
-						value: locationConfigs[i].info
-					})
-				: ''
-		};
-
-		locations.push(currentLocation);
-	}
+	configLocations.forEach(function(location) {
+		locations.push(
+			{
+				name: location.name,
+				lat: location.coordinates ? location.coordinates.split(',')[0] : hardCoded.fallbackLat,
+				lng: location.coordinates ? location.coordinates.split(',')[1] : hardCoded.fallbackLng,
+				info:
+					location.info ?
+						libs.portal.processHtml({
+							value: location.info
+						})
+					: ''
+			}
+		);
+	});
 
 	return locations;
 }
@@ -52,9 +48,8 @@ function getLocations() {
 
 
 function scriptAndCssMarkup() {
-	var siteConfig = libs.portal.getSite().data.siteConfig.config;
-	// TODO: retrieve apiKey from siteConfig
-	var apiKey = hardCoded.apiKey;
+	var siteConfig = libs.portal.getSiteConfig();
+	var apiKey = siteConfig.apiKey || '';
 
 	var html = '';
 

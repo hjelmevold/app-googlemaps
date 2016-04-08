@@ -1,22 +1,16 @@
-/*
-TODO:
-
-*/
+// Callback function that runs an init function on all containers
 function initGooglemaps() {
-	
 	var targetMapContainers = document.querySelectorAll('.googlemap');
 	Array.prototype.forEach.call(targetMapContainers, initGooglemap);
-
-	var targetStreetViewContainers = document.querySelectorAll('.googlestreetview');
-	Array.prototype.forEach.call(targetStreetViewContainers, initGooglestreetview);
 }
 
 
 
+// Init function on a single container element
 function initGooglemap(target) {
-	var zoom = parseInt(target.getAttribute('data-zoom'));
 	var theme = googlemapStyles[target.getAttribute('data-theme')];
-
+	var zoom = parseInt(target.getAttribute('data-zoom'));
+	
 	// Initialize the map
 	var map = new google.maps.Map(target, {
 		center: new google.maps.LatLng(0, 0),
@@ -75,21 +69,6 @@ function initGooglemap(target) {
 	    map.setZoom(zoom);
 	    google.maps.event.removeListener(listener);
 	});
-}
-
-
-
-function initGooglestreetview(target) {
-	var panorama = new google.maps.StreetViewPanorama(
-    	target,
-    	{
-			position: { lat: 59.908969, lng: 10.742523 },
-			pov: {
-				heading: 34,
-				pitch: 10
-			}
-    	}
-	);
 }
 
 
