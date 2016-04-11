@@ -1,0 +1,9 @@
+This software contains the following third party software:
+
+Google Maps JavaScript API v3
+  https://developers.google.com/maps/documentation/javascript/
+  License: CC BY 3.0 http://creativecommons.org/licenses/by/3.0/
+
+Snazzy Maps free styles for Google Maps
+  https://snazzymaps.com
+  License: CC0 1.0 Universal http://creativecommons.org/publicdomain/zero/1.0/
