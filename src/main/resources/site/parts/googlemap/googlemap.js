@@ -4,7 +4,7 @@ var libs = {
     content: require('/lib/xp/content'),
 	thymeleaf: require('/lib/xp/thymeleaf'),
 	data: require('/lib/enonic/util/data'),
-    util: require('/lib/enonic/util/util')
+    util: require('/lib/enonic/util')
 };
 
 // HARD-CODED SETTINGS
@@ -23,7 +23,7 @@ function getLocations() {
 	if ( config.locations ) {
 		configLocations = libs.data.forceArray(config.locations);
 	}
-	
+
 	// Create and populate array with location objects
 	var locations = [];
 	configLocations.forEach(function(location) {
@@ -80,7 +80,7 @@ function isLastAppPartOnPage() {
 	var part = libs.portal.getComponent();
 
 	var appParts = [];
-	
+
 	// Iterate through all components on page
 	if ( page.regions ) {
 		// TODO: test what happens when more than one region
@@ -97,7 +97,7 @@ function isLastAppPartOnPage() {
 			}
 		}
 	}
-	
+
 	// Test if current part is last (of all parts from this app)
 	if ( appParts[appParts.length - 1].path === part.path ) isLast = true;
 
