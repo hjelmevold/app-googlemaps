@@ -1,11 +1,3 @@
-// Callback function that runs an init function on all containers
-function initGooglemaps() {
-	var targetMapContainers = document.querySelectorAll('.googlemap');
-	Array.prototype.forEach.call(targetMapContainers, initGooglemap);
-}
-
-
-
 // Init function on a single container element
 function initGooglemap(target) {
 	var theme = googlemapStyles[target.getAttribute('data-theme')];

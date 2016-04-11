@@ -53,15 +53,17 @@ function scriptAndCssMarkup() {
 
 	var html = '';
 
+	// Callback script
+	html += '<script>function googlemapsCallback() { var targetMapContainers = document.querySelectorAll(".googlemap"); Array.prototype.forEach.call(targetMapContainers, initGooglemap); }</script>'
 	// Google Maps v3 JS API
 	html += '<script src="https://maps.googleapis.com/maps/api/js?key=';
 	html += apiKey;
-	html += '&amp;callback=initGooglemaps" async="async" defer="defer"></script>';
-	// init script
+	html += '&amp;callback=googlemapsCallback" async="async" defer="defer"></script>';
+	// Init script
 	html += '<script src="';
 	html += libs.portal.assetUrl({ path: 'js/googlemaps.js' });
 	html += '"></script>';
-	// styles
+	// Styles
 	html += '<link rel="stylesheet" type="text/css" href="';
 	html += libs.portal.assetUrl({ path: 'css/googlemaps.css' });
 	html += '" />';
