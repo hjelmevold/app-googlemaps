@@ -1,6 +1,16 @@
 # Google Maps app for Enonic XP version 6
 
-This Enonic XP application adds a Google Maps part to your [Enonic XP](https://github.com/enonic/xp) site.
+This Enonic XP application contains a Google Maps part that you may add to your [Enonic XP](https://github.com/enonic/xp) site.
+
+## Features
+* Supports multiple locations in a single map
+* Each location may have its own info window
+* Supports multiple maps (parts) on the same page
+* Responsive design where the map scales according to available width
+* Map area may have one of four aspect ratios
+* Fullscreen toggle button has been enabled by default
+* Scrolling/swiping zoom controls are disabled, so users don't get stuck inside the map
+* Several color themes are available, including more elaborate ones from snazzymaps.com
 
 ## Installation
 

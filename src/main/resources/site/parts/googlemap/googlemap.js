@@ -83,7 +83,6 @@ function isLastAppPartOnPage() {
 
 	// Iterate through all components on page
 	if ( page.regions ) {
-		// TODO: test what happens when more than one region
 		for ( var regionName in page.regions ) {
 			if ( page.regions[regionName].components ) {
 				var components = libs.data.forceArray(page.regions[regionName].components);
