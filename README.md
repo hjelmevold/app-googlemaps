@@ -8,6 +8,7 @@ This Enonic XP application contains a Google Maps part that you may add to your 
 * Supports multiple maps (parts) on the same page
 * Responsive design where the map scales according to available width
 * Map area may have one of four aspect ratios
+* Screen reader compatible markup
 * Fullscreen toggle button has been enabled by default
 * Scrolling/swiping zoom controls are disabled, so users don't get stuck inside the map
 * Several color themes are available, including more elaborate ones from snazzymaps.com
@@ -41,11 +42,16 @@ While strictly not required for Google Maps to run, Google *strongly recommends*
 
 | Version        | XP version |
 | ------------- | ------------- |
+| 1.0.1 | 6.4.0 |
 | 1.0.0 | 6.4.0 |
 
 **Important!** This App is not backwards compatible with any XP version before 6.4.
 
 ## Changelog
+
+### Version 1.0.1
+
+* Fixed bug when placing a part on a page with multiple regions
 
 ### Version 1.0.0
 
