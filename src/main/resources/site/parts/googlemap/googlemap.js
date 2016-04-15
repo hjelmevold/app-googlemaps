@@ -73,43 +73,10 @@ function scriptAndCssMarkup() {
 
 
 
-function isLastAppPartOnPage() {
-	var isLast = false;
-
-	var page = libs.portal.getContent().page;
-	var part = libs.portal.getComponent();
-
-	var appParts = [];
-
-	// Iterate through all components on page
-	if ( page.regions ) {
-		for ( var regionName in page.regions ) {
-			if ( page.regions[regionName].components ) {
-				var components = libs.data.forceArray(page.regions[regionName].components);
-
-				components.forEach( function(component) {
-					// Add component if it belongs to this app
-					if ( component.descriptor.indexOf(app.name) !== -1 ) {
-						appParts.push(component);
-					}
-				} );
-			}
-		}
-	}
-
-	// Test if current part is last (of all parts from this app)
-	if ( appParts[appParts.length - 1].path === part.path ) isLast = true;
-
-	return isLast;
-}
-
-
-
 // REQUEST HANDLING
 exports.get = function(req) {
 
 	var model = {
-		isLast: isLastAppPartOnPage(), // App scripts/css will only be included once
 		locations: getLocations(),
 		partConfig: libs.portal.getComponent().config,
 		scriptAndCssMarkup: scriptAndCssMarkup(),
@@ -125,12 +92,9 @@ exports.get = function(req) {
     var body = libs.thymeleaf.render(view, model);
 
     return {
-    	body: body
-    	// Disabled due to buggy reload behavior in Page Edit (replaced by isLast-logic in the view)
-    	/*,
+    	body: body,
     	pageContributions: {
     		headEnd: scriptAndCssMarkup()
     	}
-    	*/
 	};
 };
