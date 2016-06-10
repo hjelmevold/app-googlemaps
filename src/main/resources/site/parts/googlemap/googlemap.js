@@ -16,8 +16,7 @@ var hardCoded = {
 
 
 
-function getLocations() {
-	var config = libs.portal.getComponent().config;
+function getLocations(config) {
 
 	var configLocations = [{}];
 	if ( config.locations ) {
@@ -32,6 +31,13 @@ function getLocations() {
 				name: location.name,
 				lat: location.coordinates ? location.coordinates.split(',')[0] : hardCoded.fallbackLat,
 				lng: location.coordinates ? location.coordinates.split(',')[1] : hardCoded.fallbackLng,
+				markerIcon:
+				    location.markerIcon ?
+				        libs.portal.imageUrl({
+                            id: location.markerIcon,
+                            scale: 'block(30,30)'
+                        })
+                    : null,
 				info:
 					location.info ?
 						libs.portal.processHtml({
@@ -77,7 +83,7 @@ function scriptAndCssMarkup() {
 exports.get = function(req) {
     var partConfig = libs.portal.getComponent().config;
 	var model = {
-		locations: getLocations(),
+		locations: getLocations(partConfig),
 		partConfig: partConfig,
 		scriptAndCssMarkup: scriptAndCssMarkup(),
 		maptype: partConfig.maptype || 'ROADMAP'
