@@ -12,7 +12,7 @@ var hardCoded = {
 	viewFile: 'googlemap.html',
 	fallbackLat: '59.909195',
 	fallbackLng: '10.742339'
-}
+};
 
 
 
@@ -57,24 +57,30 @@ function scriptAndCssMarkup() {
 	var siteConfig = libs.portal.getSiteConfig();
 	var apiKey = siteConfig.apiKey || '';
 
-	var html = '';
+	var head = '', body = '';
 
 	// Callback script
-	html += '<script>function googlemapsCallback() { var targetMapContainers = document.querySelectorAll(".googlemap"); Array.prototype.forEach.call(targetMapContainers, initGooglemap); }</script>'
-	// Google Maps v3 JS API
-	html += '<script src="https://maps.googleapis.com/maps/api/js?key=';
-	html += apiKey;
-	html += '&amp;callback=googlemapsCallback" async="async" defer="defer"></script>';
+	head += '<script>function googlemapsCallback() { var targetMapContainers = document.querySelectorAll(".googlemap"); Array.prototype.forEach.call(targetMapContainers, initGooglemap); }</script>';
 	// Init script
-	html += '<script src="';
-	html += libs.portal.assetUrl({ path: 'js/googlemaps.js' });
-	html += '"></script>';
+	head += '<script src="';
+	head += libs.portal.assetUrl({ path: 'js/googlemaps.js' });
+	head += '"></script>';
 	// Styles
-	html += '<link rel="stylesheet" type="text/css" href="';
-	html += libs.portal.assetUrl({ path: 'css/googlemaps.css' });
-	html += '" />';
+	head += '<link rel="stylesheet" type="text/css" href="';
+	head += libs.portal.assetUrl({ path: 'css/googlemaps.css' });
+	head += '" />';
 
-	return html;
+	// Init script
+	body += '<script src="https://maps.googleapis.com/maps/api/js?key=';
+	body += apiKey;
+	body += '&amp;callback=googlemapsCallback" async="async" defer="defer"></script>';
+
+	return {
+		headEnd: head,
+		bodyEnd: body
+	};
+
+	// Google Maps v3 JS API
 }
 
 
@@ -100,7 +106,8 @@ exports.get = function(req) {
     return {
     	body: body,
     	pageContributions: {
-    		headEnd: scriptAndCssMarkup()
+    		headEnd: scriptAndCssMarkup().headEnd,
+    		bodyEnd: scriptAndCssMarkup().bodyEnd,
     	}
 	};
 };
