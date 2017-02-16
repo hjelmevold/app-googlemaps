@@ -4,7 +4,7 @@ This Enonic XP application contains a Google Maps part that you may add to your 
 
 ## Features
 * Supports multiple locations in a single map
-* Each location may have its own info window
+* Each location may have its own marker icon and info window
 * Supports multiple maps (parts) on the same page
 * Responsive design where the map scales according to available width
 * Map area may have one of four aspect ratios
@@ -25,7 +25,7 @@ If you are upgrading to a newer version of this app, make sure to remove the old
 
 ## How to use this app
 
-### Usage limits
+### Usage limits set by Google
 The standard usage limits for Google Maps is [25,000 map loads per 24 hours for 90 consecutive days](https://developers.google.com/maps/documentation/javascript/usage). If this limit is exceeded, you may enable pay-as-you-go billing to unlock higher quotas.
 
 ### Google Maps JavaScript API v3 Browser Key
@@ -38,20 +38,37 @@ While strictly not required for Google Maps to run, Google *strongly recommends*
 * A pop-up window appears that should include two decimal numbers separated by a comma, e.g. `59.909195, 10.742339`. These are your coordinates. If you like, you may click on the numbers and Google Maps will put them in the search field so you may easily copy them to the clipboard.
 * When creating your Google Maps part in Page Edit, these GPS coordinates may be typed/pasted into any "GPS coordinates" field.
 
+## Troubleshooting
+
+### Map does not appear while in Page Edit mode
+Make sure to hit Apply, then Save Draft. The preview area should then reload and the map should appear. It this does not help, try refreshing the browser window/tab.
+
 ## Releases and Compatibility
 
 | Version        | XP version |
 | ------------- | ------------- |
+| 1.2.0 | 6.7.0 |
+| 1.1.0 | 6.7.0 |
 | 1.0.1 | 6.4.0 |
 | 1.0.0 | 6.4.0 |
 
-**Important!** This App is not backwards compatible with any XP version before 6.4.
+**Important!** This App is not backwards compatible with any XP version before 6.7.
 
 ## Changelog
 
+### Version 1.2.0
+
+* Each location may now have its own custom marker icon image
+* Added map type setting (road, sattelite, hybrid, terrain)
+* More reliable map loading behavior
+
+### Version 1.1.0
+
+* Application icon for Enonic XP version 6.7 and later.
+
 ### Version 1.0.1
 
-* Fixed bug when placing a part on a page with multiple regions
+* Fixed bug when placing a part on a page with multiple regions. Last release that works on versions of Enonic XP from 6.4 up to 6.6
 
 ### Version 1.0.0
 
