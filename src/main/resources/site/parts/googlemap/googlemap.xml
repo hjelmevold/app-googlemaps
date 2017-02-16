@@ -57,7 +57,7 @@
           <label>Enable direct drag/scroll/zoom</label>
             <occurrences minimum="0" maximum="1"/>
         </input-->
-        <input name="maptype" type="ComboBox">
+        <input name="maptype" type="RadioButton">
           <label>Map type</label>
           <config>
             <option value="ROADMAP">Roadmap</option>
