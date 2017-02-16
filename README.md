@@ -64,11 +64,11 @@ Make sure to hit Apply, then Save Draft. The preview area should then reload and
 
 ### Version 1.1.0
 
-* Application icon for Enonic XP version 6.7 and later.
+* Application icon for Enonic XP version 6.7 and later
 
 ### Version 1.0.1
 
-* Fixed bug when placing a part on a page with multiple regions. Last release that works on versions of Enonic XP from 6.4 up to 6.6
+* Fixed bug when placing a part on a page with multiple regions
 
 ### Version 1.0.0
 
