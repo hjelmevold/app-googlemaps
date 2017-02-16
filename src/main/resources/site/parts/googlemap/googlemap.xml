@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <part>
-	<display-name>Google map</display-name>
-  	<config>
-	  	<item-set name="locations">
-	  		<label>Location</label>
-	  		<items>
-	  			<input name="name" type="TextLine">
-		  			<label>Location Name</label>
-			      	<occurrences minimum="1" maximum="1"/>
-			    </input>
-		  		<input name="coordinates" type="GeoPoint">
-			      	<label>GPS Coordinates</label>
-			      	<occurrences minimum="1" maximum="1"/>
-			    </input>
-			    <input name="info" type="HtmlArea">
-		  			<label>Info</label>
-			      	<occurrences minimum="0" maximum="1"/>
-			    </input>
-	  		</items>
-	  		<occurrences minimum="1" maximum="0"/>
-	  	</item-set>
-	  	<field-set name="settings">
-	  		<label>Map Settings</label>
-	  		<items>
-	  			<input name="aspectratio" type="RadioButton">
-	  				<label>Aspect ratio</label>
-	  				<config>
-	  					<!-- Golden ratios -->
-	  					<option value="ultrawide">Ultra-wide</option>	<!-- 38% -->
-	  					<option value="landscape">Landscape</option>	<!-- 62% (default) -->
-					    <option value="square">Square</option>	<!-- 100% -->
-					    <option value="portrait">Portrait</option>	<!-- 162% -->
-					</config>
-					<occurrences minimum="0" maximum="1"/>
-	  			</input>
-	  			<input name="zoom" type="TextLine">
-		  			<label>Manual zoom amount (1-20)</label>
-			      	<occurrences minimum="0" maximum="1"/>
-			      	<config>
-		    			<regexp>^([1-9]|1[0-9]|20)$</regexp>
-		    		</config>
-			    </input>
-			    <!--input name="center" type="GeoPoint">
-			      	<label>Manual center coordinates</label>
-			      	<occurrences minimum="0" maximum="1"/>
-			    </input-->
-			    <!--input name="interactable" type="CheckBox">
-		  			<label>Enable direct drag/scroll/zoom</label>
-			      	<occurrences minimum="0" maximum="1"/>
-			    </input-->
-			    <input name="theme" type="ComboBox">
-					<label>Theme</label>
-					<config>
-						<option value="original">Google Maps</option>
-						<option value="gray">Gray</option>
-						<option value="red">Red</option>
-						<option value="orange">Orange</option>
-						<option value="yellow">Yellow</option>
-						<option value="green">Green</option>
-						<option value="cyan">Cyan</option>
-						<option value="blue">Blue</option>
-						<option value="indigo">Indigo</option>
-						<option value="purple">Purple</option>
-						<option value="magenta">Magenta</option>
-						<option value="pink">Pink</option>
-						<option value="mapboxClean">MapBox</option>
-						<option value="appleMapsEsque">Apple Maps</option>
-						<option value="paper">Paper</option>
-						<option value="chilled">Chilled</option>
-						<option value="oldTimey">Old Timey</option>
-						<option value="navigation">Navigation</option>
-						<option value="blueIsh">Blue-ish</option>
-						<option value="unsaturatedBrowns">Unsaturated Browns</option>
-						<option value="ultraLightWithLabels">Ultra Light With Labels</option>
-						<option value="lunarLandscape">Lunar Landscape</option>
-						<option value="snazzyGreen">Snazzy Green</option>
-						<option value="snazzyMaps">Snazzy Maps</option>
-						<option value="midnightCommander">Midnight Commander</option>
-						<option value="subtleGrayscale">Subtle Grayscale</option>
-					</config>
-					<occurrences minimum="0" maximum="1"/>
-				</input>
-	  		</items>
-	  	</field-set>
-  	</config>
+  <display-name>Google map</display-name>
+  <config>
+    <item-set name="locations">
+      <label>Location</label>
+      <items>
+        <input name="name" type="TextLine">
+          <label>Location Name</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+        <input name="coordinates" type="GeoPoint">
+          <label>GPS Coordinates</label>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+        <input name="info" type="HtmlArea">
+          <label>Info</label>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+      <occurrences minimum="1" maximum="0"/>
+    </item-set>
+    <field-set name="settings">
+      <label>Map Settings</label>
+      <items>
+        <input name="aspectratio" type="RadioButton">
+          <label>Aspect ratio</label>
+          <config>
+            <!-- Golden ratios -->
+            <option value="ultrawide">Ultra-wide</option>	<!-- 38% -->
+            <option value="landscape">Landscape</option>	<!-- 62% (default) -->
+            <option value="square">Square</option>	<!-- 100% -->
+            <option value="portrait">Portrait</option>	<!-- 162% -->
+          </config>
+          <default>landscape</default>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+        <input name="zoom" type="TextLine">
+          <label>Manual zoom amount (1-20)</label>
+          <occurrences minimum="0" maximum="1"/>
+          <config>
+            <regexp>^([1-9]|1[0-9]|20)$</regexp>
+          </config>
+        </input>
+        <!--input name="center" type="GeoPoint">
+            <label>Manual center coordinates</label>
+            <occurrences minimum="0" maximum="1"/>
+        </input-->
+        <!--input name="interactable" type="CheckBox">
+          <label>Enable direct drag/scroll/zoom</label>
+            <occurrences minimum="0" maximum="1"/>
+        </input-->
+        <input name="maptype" type="ComboBox">
+          <label>Map type</label>
+          <config>
+            <option value="ROADMAP">Roadmap</option>
+            <option value="SATELLITE">Satellite</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="TERRAIN">Terrain</option>
+          </config>
+          <default>ROADMAP</default>
+          <occurrences minimum="1" maximum="1"/>
+        </input>
+        <input name="theme" type="ComboBox">
+          <label>Theme</label>
+          <config>
+            <option value="original">Google Maps</option>
+            <option value="gray">Gray</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="cyan">Cyan</option>
+            <option value="blue">Blue</option>
+            <option value="indigo">Indigo</option>
+            <option value="purple">Purple</option>
+            <option value="magenta">Magenta</option>
+            <option value="pink">Pink</option>
+            <option value="mapboxClean">MapBox</option>
+            <option value="appleMapsEsque">Apple Maps</option>
+            <option value="paper">Paper</option>
+            <option value="chilled">Chilled</option>
+            <option value="oldTimey">Old Timey</option>
+            <option value="navigation">Navigation</option>
+            <option value="blueIsh">Blue-ish</option>
+            <option value="unsaturatedBrowns">Unsaturated Browns</option>
+            <option value="ultraLightWithLabels">Ultra Light With Labels</option>
+            <option value="lunarLandscape">Lunar Landscape</option>
+            <option value="snazzyGreen">Snazzy Green</option>
+            <option value="snazzyMaps">Snazzy Maps</option>
+            <option value="midnightCommander">Midnight Commander</option>
+            <option value="subtleGrayscale">Subtle Grayscale</option>
+          </config>
+          <default>original</default>
+          <occurrences minimum="0" maximum="1"/>
+        </input>
+      </items>
+    </field-set>
+  </config>
 </part>

@@ -2,12 +2,13 @@
 function initGooglemap(target) {
 	var theme = googlemapStyles[target.getAttribute('data-theme')];
 	var zoom = parseInt(target.getAttribute('data-zoom'));
+	var maptype = target.getAttribute('data-maptype').toUpperCase();
 	
 	// Initialize the map
 	var map = new google.maps.Map(target, {
 		center: new google.maps.LatLng(0, 0),
 		fullscreenControl: true,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		mapTypeId: google.maps.MapTypeId[maptype],
 		scrollwheel: false,
 		styles: theme,
 		zoom: zoom
