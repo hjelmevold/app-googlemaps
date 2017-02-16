@@ -1,12 +1,12 @@
 <figure class="part-googlemap" data-th-classappend="${partConfig.aspectratio}">
 	<figcaption>
 		<dl>
-		<!--/*/
-		<th:block data-th-each="location : ${locations}">
-			<dt data-lat="59.909125" data-lng="10.742239" data-th-attr="data-lat=${location.lat},data-lng=${location.lng}" data-th-text="${location.name}">Enonic AS</dt>
+
+		<div data-th-each="location : ${locations}" data-th-remove="tag">
+			<dt data-lat="59.909125" data-lng="10.742239" data-th-attr="data-lat=${location.lat},data-lng=${location.lng},data-markericon=${location.markerIcon}" data-th-text="${location.name}">Enonic AS</dt>
 			<dd data-th-utext="${location.info}"><h3>Enonic AS</h3><p>Kirkegata 1-3<br/>Oslo</p></dd>
-		</th:block>
-		/*/-->
+		</div>
+
 		</dl>
 	</figcaption>
 	<div class="googlemap" data-th-attr="data-theme=${partConfig.theme},data-zoom=${partConfig.zoom},data-maptype=${maptype}"></div>

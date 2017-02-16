@@ -27,7 +27,8 @@ function initGooglemap(target) {
 	        	lat: parseFloat(currentMarker.getAttribute('data-lat')),
 	        	lng: parseFloat(currentMarker.getAttribute('data-lng'))
 	        },
-	        title: currentMarker.innerText
+	        title: currentMarker.innerText,
+	        icon: currentMarker.getAttribute('data-markericon')
 	    });
 
 		// Add infowindow if the following <dd> has HTML content

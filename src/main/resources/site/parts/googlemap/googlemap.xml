@@ -13,6 +13,13 @@
           <label>GPS Coordinates</label>
           <occurrences minimum="1" maximum="1"/>
         </input>
+        <input type="ImageSelector" name="markerIcon">
+          <label>Marker Icon</label>
+          <occurrences minimum="0" maximum="1"/>
+          <config>
+            <allowPath>${site}/*</allowPath>
+          </config>
+        </input>
         <input name="info" type="HtmlArea">
           <label>Info</label>
           <occurrences minimum="0" maximum="1"/>
