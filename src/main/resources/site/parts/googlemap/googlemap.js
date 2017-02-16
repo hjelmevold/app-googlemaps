@@ -75,12 +75,12 @@ function scriptAndCssMarkup() {
 
 // REQUEST HANDLING
 exports.get = function(req) {
-
+    var partConfig = libs.portal.getComponent().config;
 	var model = {
 		locations: getLocations(),
-		partConfig: libs.portal.getComponent().config,
+		partConfig: partConfig,
 		scriptAndCssMarkup: scriptAndCssMarkup(),
-		siteConfig: libs.portal.getSiteConfig()
+		maptype: partConfig.maptype || 'ROADMAP'
 	};
 
 	// Fill possible null values with fallbacks
