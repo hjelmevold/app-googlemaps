@@ -2,9 +2,9 @@
 var libs = {
     portal: require('/lib/xp/portal'),
     content: require('/lib/xp/content'),
-	thymeleaf: require('/lib/xp/thymeleaf'),
-	data: require('/lib/enonic/util/data'),
-    util: require('/lib/enonic/util')
+	thymeleaf: require('/lib/thymeleaf'),
+	data: require('/lib/util/data'),
+    util: require('/lib/util')
 };
 
 // HARD-CODED SETTINGS
@@ -107,7 +107,7 @@ exports.get = function(req) {
     	body: body,
     	pageContributions: {
     		headEnd: scriptAndCssMarkup().headEnd,
-    		bodyEnd: scriptAndCssMarkup().bodyEnd,
+    		bodyEnd: scriptAndCssMarkup().bodyEnd
     	}
 	};
 };

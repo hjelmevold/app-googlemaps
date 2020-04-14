@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <part>
   <display-name>Google map</display-name>
-  <config>
+  <form>
     <item-set name="locations">
       <label>Location</label>
       <items>
@@ -103,5 +103,5 @@
         </input>
       </items>
     </field-set>
-  </config>
+  </form>
 </part>

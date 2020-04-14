@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-	<config>
+	<form>
 		<field-set name="account">
 			<label>Account</label>
 			<items>
 				<input name="apiKey" type="TextLine">
 					<label>Google Maps v3 API Key</label>
 					<occurrences minimum="0" maximum="1"/>
+					<help-text>Documentation: https://github.com/hjelmevold/app-googlemaps/blob/master/README.md#google-maps-javascript-api-v3-browser-key</help-text>
 		    	</input>
 			</items>
 		</field-set>
@@ -22,5 +23,5 @@
 		    	</input>
 			</items>
 		</field-set-->
-  	</config>
+  	</form>
 </site>
