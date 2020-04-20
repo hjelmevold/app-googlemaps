@@ -1,4 +1,4 @@
-# Google Maps app for Enonic XP version 6
+# Google Maps app for Enonic XP
 
 This Enonic XP application contains a Google Maps part that you may add to your [Enonic XP](https://github.com/enonic/xp) site.
 
