@@ -24,29 +24,31 @@ function getLocations(config) {
 	}
 
 	// Create and populate array with location objects
-	var locations = [];
-	configLocations.forEach(function(location) {
-		locations.push(
-			{
+	//var locations = [];
+	//configLocations.forEach(function(location) {
+		//locations.push(
+			//Combined condition for 'configLocations into a operator.
+			//Used map function instead of forEach to create the locations array.
+			//Formatted the markerIcon assignment for easier to read.
+			var locations = configLocations.map(function(location) {
+			return {
 				name: location.name,
 				lat: location.coordinates ? location.coordinates.split(',')[0] : hardCoded.fallbackLat,
 				lng: location.coordinates ? location.coordinates.split(',')[1] : hardCoded.fallbackLng,
-				markerIcon:
-				    location.markerIcon ?
-				        libs.portal.imageUrl({
+				markerIcon: location.markerIcon
+				    //location.markerIcon ?
+				      ?  libs.portal.imageUrl({
                             id: location.markerIcon,
                             scale: 'block(30,30)'
                         })
-                    : null,
-				info:
-					location.info ?
-						libs.portal.processHtml({
-							value: location.info
-						})
-					: ''
-			}
-		);
-	});
+						: hardCoded.defaultMarkerIcon
+                   //: null,
+				//info:
+					//location.info ?
+						//libs.portal.processHtml({
+							//value: location.info
+					};
+				});
 
 	return locations;
 }
