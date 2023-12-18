@@ -19,8 +19,9 @@ function initGooglemap(target) {
 
 	// Create markers
 	var markerSources = target.previousElementSibling.querySelectorAll('dt');
-	Array.prototype.forEach.call(markerSources, function(currentMarker) {
-
+	markerSources.forEach(function(currentMarker) {
+	//Array.prototype.forEach.call(markerSources, function(currentMarker) {
+		//Removed Array.prototype.forEach.all and replaced it with a forEach method.
 		var marker = new google.maps.Marker({
 	        map: map,
 	        position: {
